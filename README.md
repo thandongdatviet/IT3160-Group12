@@ -1,7 +1,7 @@
 # MAP AI PATHFINDING BETWEEN TWO POINTS
 
 ## Mô tả Project
-Đây là kết quả bài tập lớn môn Nhập môn Trí tuệ Nhân tạo IT3160, kì 20222, sáng thứ 2.
+Đây là kết quả bài tập lớn môn Nhập môn Trí tuệ Nhân tạo IT3160, kì 20232, sáng thứ 2.
 Cho 2 điểm trên bản đồ, tìm đường đi từ một điểm đến điểm còn lại.
 Cung cấp người dùng cái nhìn trực quan về tìm kiếm đường đi trong thực tế.
 Sử dụng thuật toán tìm kiếm A* với hàm heuristic Euclid.
