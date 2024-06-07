@@ -165,42 +165,53 @@ class Map:
         if self.map_points.get(str(end_pos)) is None:
             process_point[str(end_pos)] = ProcessPoint(end_pos)
 
-        # Step 1: Initialize distances from start to all other vertices as INFINITY
-        for key in process_point:
-            process_point[key].f = INFINITY
-            process_point[key].parent = None
-        process_point[str(start_pos)].f = 0
+        process_point[str(start_pos)].g = 0
 
-        # Step 2: Relax all edges |V| - 1 times
-        for _ in range(len(self.map_points) - 1):
-            for road in self.roads:
-                u = process_point[str(road.from_point.pos)]
-                v = process_point[str(road.to_point.pos)]
-                if u.f != INFINITY and u.f + road.length < v.f:
-                    v.f = u.f + road.length
-                    v.parent = u
+        # Number of vertices
+        num_vertices = len(process_point)
 
-        # Step 3: Check for negative-weight cycles (optional for this scenario)
-        for road in self.roads:
-            u = process_point[str(road.from_point.pos)]
-            v = process_point[str(road.to_point.pos)]
-            if u.f != INFINITY and u.f + road.length < v.f:
-                print("Graph contains negative weight cycle")
-                return None
+        # Relax all edges num_vertices - 1 times
+        for _ in range(num_vertices - 1):
+            for key, current_point in process_point.items():
+                for road, to_point in current_point.point.adjacents:
+                    process_to_point = process_point[str(to_point)]
+                    g_new = current_point.g + road.length
 
-        # Step 4: Retrieve the path from start_pos to end_pos
-        path = []
-        current_node = process_point[str(end_pos)]
-        while current_node.parent is not None:
-            for road, point in current_node.parent.point.adjacents:
-                if point == current_node.point:
-                    path.insert(0, road)
-                    break
-            current_node = current_node.parent
+                    if g_new < process_to_point.g:
+                        process_to_point.g = g_new
+                        process_to_point.parent = current_point
 
-        return (path,
-                [process_point[key].point for key in process_point if process_point[key].f != INFINITY],
-                [process_point[key].point for key in process_point if process_point[key].f == INFINITY])
+        # Check for negative weight cycles
+        for key, current_point in process_point.items():
+            for road, to_point in current_point.point.adjacents:
+                process_to_point = process_point[str(to_point)]
+                if current_point.g + road.length < process_to_point.g:
+                    raise ValueError("Graph contains a negative weight cycle")
+
+        # Build the path and collect open and closed points
+        stack = []
+        closed_lst = set()
+        current_point = process_point[str(end_pos)]
+        parent_node = current_point.parent
+
+        if parent_node is not None or start_pos == end_pos:
+            while parent_node is not None:
+                for road, point in parent_node.point.adjacents:
+                    if str(point) == str(current_point):
+                        stack.insert(0, road)
+                        break
+                closed_lst.add(str(current_point))
+                current_point = parent_node
+                parent_node = parent_node.parent
+
+            closed_lst.add(str(current_point))
+
+            open_lst = [process_point[key].point for key in process_point if key not in closed_lst]
+
+            return (stack, open_lst, [process_point[key].point for key in closed_lst])
+        else:
+            return (None, [process_point[key].point for key in process_point if key != str(start_pos)],
+                    [process_point[key].point for key in closed_lst])
     
     def find_path_dijicktra(self, start_pos: tuple, end_pos: tuple):
 
