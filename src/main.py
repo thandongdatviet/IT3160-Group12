@@ -53,15 +53,15 @@ class Main:
                             is_click)
             display.show_locations(screen, start_point, end_point)
             button_rect = rect(screen, 'blue', (UI_LEFT + 150, 550, 150, 50))
-            text = Font(None, 36).render("A*", True, COLOR["WHITE"])
+            text = Font(None, 32).render("A*", True, COLOR["WHITE"])
             screen.blit(text, text.get_rect(center=button_rect.center))
 
             button_rect_1 = rect(screen, 'blue', (UI_LEFT + 150, 650, 150, 50))
-            text = Font(None, 36).render("Bellman-Ford", True, COLOR["WHITE"])
+            text = Font(None, 32).render("Bellman-Ford", True, COLOR["WHITE"])
             screen.blit(text, text.get_rect(center=button_rect_1.center))
 
             button_rect_2 = rect(screen, 'blue', (UI_LEFT + 150, 750, 150, 50))
-            text = Font(None, 36).render("Dijisktra", True, COLOR["WHITE"])
+            text = Font(None, 32).render("Dijisktra", True, COLOR["WHITE"])
             screen.blit(text, text.get_rect(center=button_rect_2.center))
 
             flip()
