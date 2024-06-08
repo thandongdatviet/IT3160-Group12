@@ -4,16 +4,20 @@
 Đây là kết quả bài tập lớn môn Nhập môn Trí tuệ Nhân tạo IT3160, kì 20232, sáng thứ 2.
 Cho 2 điểm trên bản đồ, tìm đường đi từ một điểm đến điểm còn lại.
 Cung cấp người dùng cái nhìn trực quan về tìm kiếm đường đi trong thực tế.
-Sử dụng thuật toán tìm kiếm A* với hàm heuristic Euclid.
+Project này sử dụng ba thuật toán tìm kiếm:
+ - Thuật toán tìm kiếm A* với hàm heuristic Euclid.
+ - Thuật toán Dijkstra
+ - Thuật toán Bellman–Ford
 Tham khảo: 
 - https://vi.wikipedia.org/wiki/Gi%E1%BA%A3i_thu%E1%BA%ADt_t%C3%ACm_ki%E1%BA%BFm_A*
 - https://www.geeksforgeeks.org/a-search-algorithm/
-> Nếu hàm heuristic **__h__** có tính chất thu nạp được (admissible), nghĩa là nó không bao giờ đánh giá cao hơn chi phí nhỏ nhất thực sư của việc đi tới đích, thì bản thân A* có tính **tối ưu**
+- https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+- https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm
 
 ## Cách sử dụng
 - Để chọn điểm xuất phát, nhấn chuột trái vào bàn đồ
 - Để chọn điểm cần đến (đích), nhấn chuột phải vào bản đồ
-- Nhấp chuột vào Find Path để tìm đường đi
+- Nhấp chuột vào một trong ba loại thuật toán để tìm đường đi
 - Để bật/tắt hiển thị tất cả các đường có thể đi, bấm phím T
 - Để bật/tắt hiển thị không gian tìm kiếm của bài toán (tập mở, tập đóng), bấm phím R
 - Để thoát khỏi chương trình, bấm phím Q
