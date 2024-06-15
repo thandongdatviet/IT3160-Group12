@@ -213,7 +213,7 @@ class Map:
             return (None, [process_point[key].point for key in process_point if key != str(start_pos)],
                     [process_point[key].point for key in closed_lst])
     
-    def find_path_dijicktra(self, start_pos: tuple, end_pos: tuple):
+    def find_path_dijkstra(self, start_pos: tuple, end_pos: tuple):
 
         import heapq
 
@@ -243,6 +243,7 @@ class Map:
             closed_lst.add(q)
 
             if current_point.pos == end_pos:
+                print(f"Minimum g(n) (cost) to reach the destination: {current_g}")
                 # Found the destination
                 stack = []
                 child_node = current_point
@@ -255,6 +256,7 @@ class Map:
                     child_node = parent_node
                     parent_node = parent_node.parent
 
+                
                 return (stack,
                         [process_point[key].point for _, key in open_lst],
                         [process_point[key].point for key in closed_lst])

@@ -104,7 +104,7 @@ class Main:
                         is_click = True
                         if start_point and end_point:
                             start_time = time.time()
-                            self.path, self.open_list, self.closed_list = map.find_path_dijicktra(
+                            self.path, self.open_list, self.closed_list = map.find_path_dijkstra(
                                 start_point, end_point)
                             end_time = time.time()
                             route_length = ratio * sum(
